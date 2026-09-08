@@ -78,4 +78,4 @@ jobs:
               run: composer install --no-progress --prefer-dist
 
             - name: Lancer les tests
-              run: vendor/bin/phpunit --testdox
+              run: php bin/phpunit
