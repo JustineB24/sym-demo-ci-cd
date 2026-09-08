@@ -39,3 +39,10 @@ jobs:
 
             - name: Lancer l'audit de sécurité
               run: composer audit --no-interaction
+
+    notify:
+        needs: audit
+        runs-on: ubuntu-latest
+        steps:
+            - name: Envoyer une notification
+              run: echo "Audit terminé"
