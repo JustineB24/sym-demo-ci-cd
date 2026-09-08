@@ -36,3 +36,6 @@ jobs:
 
             - name: Installer les dépendances
               run: composer install --no-progress --prefer-dist
+
+            - name: Lancer l'audit de sécurité
+              run: composer audit --no-interaction
