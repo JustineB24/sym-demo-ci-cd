@@ -1,4 +1,4 @@
-name: audit du code
+name: qualité du code
 
 on:
     push:
@@ -10,10 +10,8 @@ on:
             - develop
 
 jobs:
-    audit:
+    quality:
         runs-on: ubuntu-latest
-        outputs:
-            version: ${{ steps.version.outputs.version }}
         steps:
             - name: Récupérer le code
               uses: actions/checkout@v7
@@ -38,19 +36,3 @@ jobs:
 
             - name: Installer les dépendances
               run: composer install --no-progress --prefer-dist
-
-            - name: Lancer l'audit de sécurité
-              run: composer audit --no-interaction
-
-            - name: Calculer la version de l'audit
-              id: version
-              run: echo "version=1.0.1" >> $GITHUB_OUTPUT
-
-    notify:
-        needs: audit
-        runs-on: ubuntu-latest
-        steps:
-            - name: Envoyer une notification
-              run: |
-                  echo "Audit terminé"
-                  echo "Version de l'audit: ${{ needs.audit.outputs.version }}"
